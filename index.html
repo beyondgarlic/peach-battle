@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>제1회 의성장날 천하제일 복숭아 대전</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>제1회 의성장날 천하제일 복숭아 대전</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main id="container">
@@ -74,5 +75,22 @@
         </section>
     </main>
     <script src="script.js"></script>
+    <script>
+        // 더블탭 확대 방지
+        document.addEventListener('touchstart', function (event) {
+            if (event.touches.length > 1) {
+            event.preventDefault(); // 두 손가락 확대 방지
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+            event.preventDefault(); // 더블탭 확대 방지
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
 </body>
 </html>
