@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>제1회 의성장날 천하제일 복숭아 대전</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -55,6 +55,17 @@
                 당신의 복숭아력은 <span id="final-score">0</span>점 입니다!
             </p>
             <p id="contribution-text" class="result-desc"></p>
+            
+            <div class="team-scores">
+              <div class="team-score soft-team">
+                <h3>🍑 과즙팡팡 물복파 🍑</h3>
+                <p id="soft-score-total">0</p>
+              </div>
+              <div class="team-score hard-team">
+                <h3>🍑 아삭단단 딱복군 🍑</h3>
+                <p id="hard-score-total">0</p>
+              </div>
+            </div>
             
             <div class="result-buttons">
                 <button class="btn-restart" onclick="restart()">랭킹 1위 재도전!</button>
