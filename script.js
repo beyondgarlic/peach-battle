@@ -14,6 +14,10 @@ const finalScoreDisplay = document.querySelector('#final-score');
 const resultRank = document.querySelector('#result-rank');
 const contributionText = document.querySelector('#contribution-text');
 
+// 3. 팀별 누적 점수 DOM 요소 추가
+const softScoreTotalDisplay = document.querySelector('#soft-score-total');
+const hardScoreTotalDisplay = document.querySelector('#hard-score-total');
+
 // --- 게임 상태 변수 ---
 let score = 0;
 let timeLeft = 10;
@@ -106,6 +110,9 @@ function endGame() {
     
     const factionName = chosenFaction === 'soft' ? '물복파' : '딱복군';
     contributionText.innerText = `당신의 복숭아력 ${score}점이 ${factionName} 총점수에 기여했습니다!`;
+
+    // 3. 팀별 누적 점수 업데이트 및 표시
+    updateTeamScores();
 }
 
 // 7. 점수에 따른 등급(칭호) 반환
@@ -125,4 +132,26 @@ function restart() {
 // 9. 쇼핑몰로 이동 (본인의 쇼핑몰 주소로 변경하세요)
 function goToShop() {
     window.open('https://www.uiseongmall.co.kr/', '_blank');
+}
+
+// 3. 팀별 누적 점수를 계산하고 화면에 표시하는 함수 추가
+function updateTeamScores() {
+    // localStorage에서 기존 점수 가져오기 (없으면 0)
+    let softTotal = parseInt(localStorage.getItem('softPeachTotalScore')) || 0;
+    let hardTotal = parseInt(localStorage.getItem('hardPeachTotalScore')) || 0;
+
+    // 현재 게임 점수를 선택한 진영에 더하기
+    if (chosenFaction === 'soft') {
+        softTotal += score;
+    } else if (chosenFaction === 'hard') {
+        hardTotal += score;
+    }
+
+    // localStorage에 새로운 총점 저장하기
+    localStorage.setItem('softPeachTotalScore', softTotal);
+    localStorage.setItem('hardPeachTotalScore', hardTotal);
+
+    // 화면에 총점 표시하기 (숫자에 콤마 추가)
+    softScoreTotalDisplay.innerText = softTotal.toLocaleString();
+    hardScoreTotalDisplay.innerText = hardTotal.toLocaleString();
 }
